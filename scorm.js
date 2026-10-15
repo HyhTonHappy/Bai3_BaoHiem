@@ -1,4 +1,4 @@
-/* SCORM 1.2 bridge for "Bài 3 – Bảo hiểm".
+/* SCORM 1.2 bridge for "Bài 3 – Bảo hiểm (Tiết 1)".
    Works standalone too: without an LMS it falls back to browser storage. */
 (function(){
   function findAPI(w){var n=0;while(w&&!w.API&&w.parent&&w.parent!==w&&n<12){n++;w=w.parent;}return (w&&w.API)?w.API:null;}
@@ -11,10 +11,10 @@
     S.student=g('cmi.core.student_name');S.id=g('cmi.core.student_id');
     var st=g('cmi.core.lesson_status');if(!st||st==='not attempted')s('cmi.core.lesson_status','incomplete');
     var sd=g('cmi.suspend_data');if(sd){try{S.data=JSON.parse(sd)||{};}catch(e){S.data={};}}
-    if(S.data.v!==6){S.data={v:6};}
+    if(S.data.v!==7){S.data={v:7};}
   }
   /* local keys are namespaced per learner, so shared computers in a lab don't mix students */
-  var prefix='bh3v6_'+(S.id?String(S.id).replace(/[^\w-]/g,'')+'_':'');
+  var prefix='bh3t1_'+(S.id?String(S.id).replace(/[^\w-]/g,'')+'_':'');
   function lsGet(k){try{var v=localStorage.getItem(prefix+k);return v==null?undefined:JSON.parse(v);}catch(e){return undefined;}}
   function lsSet(k,v){try{localStorage.setItem(prefix+k,JSON.stringify(v));}catch(e){}}
   function commit(){if(!API)return;var d={};for(var k in S.data){d[k]=S.data[k];}
